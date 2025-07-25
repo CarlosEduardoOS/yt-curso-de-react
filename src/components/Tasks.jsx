@@ -1,4 +1,4 @@
-import { ChevronRightIcon, TrashIcon } from "lucide-react";
+import { ChevronRightIcon, TrashIcon, CheckIcon, Tally1 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Button from "./Button";
 
@@ -26,9 +26,15 @@ function Tasks(props) {
               className={`bg-slate-400 text-left w-full text-white p-2 rounded-md hover:bg-slate-500 transition-colors duration-200 ${
                 // aqui tem que usar a craze se quiser fazer esse esquema condicional
                 task.isCompleted && "line-through !bg-slate-500" //esse ! faz o tailwind dar prioridade pra ele, pq como ja tem algo q muda a cor do fundo ali em cima ele conflita
-              }`}
+              } flex items-center space-x-2`} // adiciona alinhamento horizontal
             >
-              {task.title}
+              {task.isCompleted && (
+                <>
+                  <CheckIcon className="w-6 h-6" />
+                  <Tally1 className="w-6 h-6 -mr-3" />
+                </>
+              )}
+              <span>{task.title}</span>
             </button>
             <Button onClick={() => onSeeDetails(task)}>
               {/*A partir do momento que isso virou um componente, o onClick deixou de ser uma função e se tornou uma prop que será tratada la dentro do */}
